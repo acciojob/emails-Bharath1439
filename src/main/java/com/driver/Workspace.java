@@ -34,6 +34,5 @@ public class Workspace extends Gmail{
             }
         }
         return maxmeeting;
-
     }
 }

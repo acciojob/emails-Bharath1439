@@ -26,23 +26,30 @@ public class Email {
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
         if(oldPassword.equals(this.password)){
-            int uppercase=0,lowercase=0,digit=0,special=0;
-            for(int i=0;i<newPassword.length();i++){
-                if(newPassword.charAt(i)>=65 && newPassword.charAt(i)<=90){
-                    uppercase++;
+            if (oldPassword.equals(this.password)) {
+                boolean isUppercase = false, isLowercase = false, isDigit = false, isSpecial = false;
+
+                for (int i = 0; i < newPassword.length(); i++) {
+                    if (newPassword.charAt(i) >= 65 && newPassword.charAt(i) <= 90) {
+                        isUppercase = true;
+                    }
+                    if (newPassword.charAt(i) >= 97 && newPassword.charAt(i) <= 122) {
+                        isLowercase = true;
+                    }
+
+                    if (newPassword.charAt(i) >= 48 && newPassword.charAt(i) <= 57) {
+                        isDigit = true;
+                    }
+                    if (!Character.isLetterOrDigit(newPassword.charAt(i))) {
+                        isSpecial = true;
+                    }
                 }
-                if(newPassword.charAt(i)>=97 && newPassword.charAt(i)<=122){
-                    lowercase++;
+                if (newPassword.length() >= 8 && isUppercase && isLowercase && isDigit && isSpecial) {
+                    this.password = newPassword;
                 }
-                if(newPassword.charAt(i)>=48 && newPassword.charAt(i)<=57){
-                    digit++;
-                }
-                if(!Character.isLetterOrDigit(newPassword.charAt(i))){
-                    special++;
-                }
-            }
-            if(uppercase>=1 && lowercase>=1 && digit>=1 && special>=1 && newPassword.length()>=8){
-                this.password=newPassword;
+
+
+
             }
         }
 

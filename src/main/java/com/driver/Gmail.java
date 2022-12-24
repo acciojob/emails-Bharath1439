@@ -24,7 +24,8 @@ public class Gmail extends Email {
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
         if(getInboxSize()<getInboxCapacity()){
-            Inbox.add(new Mail(date,sender,message));
+            Mail mail=new Mail(date,sender,message);
+            Inbox.add(mail);
         }
         else{
             trash.add(Inbox.get(0));
@@ -40,6 +41,7 @@ public class Gmail extends Email {
             if(Inbox.get(i).getMessage().equals(message)){
                 trash.add(Inbox.get(i));
                 Inbox.remove(i);
+                break;
             }
         }
     }
@@ -50,9 +52,9 @@ public class Gmail extends Email {
         if(getInboxSize()==0){
             return null;
         }
-        else{
+
             return Inbox.get(getInboxSize()-1).getMessage();
-        }
+
 
     }
 
@@ -73,7 +75,7 @@ public class Gmail extends Email {
         //It is guaranteed that start date <= end date
         int numberofMails=0;
         for(int i=0;i<getInboxSize()-1;i++){
-            if(Inbox.get(i).getDate().after(start) && Inbox.get(i).getDate().before(end) ){
+            if(Inbox.get(i).getDate().compareTo(start)>=0 && Inbox.get(i).getDate().compareTo(end)<=0 ){
                 numberofMails++;
             }
         }
