@@ -29,6 +29,8 @@ public class Gmail extends Email {
         }
         else{
             trash.add(Inbox.get(0));
+            Inbox.remove(0);
+            Inbox.add(new Mail(date, sender, message));
         }
 
 
@@ -104,6 +106,6 @@ public class Gmail extends Email {
 
     public int getInboxCapacity() {
         // Return the maximum number of mails that can be stored in the inbox
-        return inboxCapacity;
+        return this.inboxCapacity;
     }
 }
